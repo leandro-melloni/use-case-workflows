@@ -16,11 +16,11 @@ jobs:
           dotnet-version: 7.0.x
       - run: cd ./src/WebApplication1
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore ./src/WebApplication1
       - name: Build
-        run: dotnet build
+        run: dotnet build ./src/WebApplication1
       - name: Publish
-        run: dotnet publish --no-build --output ./artifacts
+        run: dotnet publish ./src/WebApplication1 --no-build --output ./artifacts
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
