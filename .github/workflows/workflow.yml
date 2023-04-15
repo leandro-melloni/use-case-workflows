@@ -59,3 +59,18 @@ jobs:
         run: docker build -t ghcr.io/leandro-melloni/use-case-workflows:latest .
       - name: Push Docker image
         run: docker push ghcr.io/leandro-melloni/use-case-workflows:latest
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build-docker]
+    steps:
+      - uses: actions/checkout@v3
+      - name: docker login
+        uses: docker/login-action@v2
+        with:
+            registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.PAT }}
+      - name: Pull Docker image
+        run: docker pull ghcr.io/leandro-melloni/use-case-workflows:latest
+      - name: Deploy
+        run: echo "Deploying...! A partir deste ponto, devido a ausência de um ECS, o deploy é apenas um echo."
