@@ -49,5 +49,13 @@ jobs:
         with:
           name: artifacts
           path: ./artifacts
+      - name: docker login
+        uses: docker/login-action@v2
+        with:
+            registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build Docker image
-        run: docker build -t webapp:latest .
+        run: docker build -t use-case-workflows:latest .
+      - name: Push Docker image
+        run: docker push ghcr.io/leandro-melloni/use-case-workflows:latest
