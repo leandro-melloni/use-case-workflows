@@ -26,3 +26,18 @@ jobs:
         with:
           name: artifacts
           path: ./artifacts
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 7.0.x
+      - run: cd ./src/WebApplication1
+      - name: Restore
+        run: dotnet restore ./src/TestProject1
+      - name: Build
+        run: dotnet build ./src/TestProject1
+      - name: Test
+        run: dotnet test ./src/TestProject1
