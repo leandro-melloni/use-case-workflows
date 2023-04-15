@@ -39,3 +39,15 @@ jobs:
         run: dotnet restore ./src/TestProject1
       - name: Test
         run: dotnet test ./src/TestProject1
+  build-docker:
+    runs-on: ubuntu-latest
+    needs: [build, test]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: artifacts
+          path: ./artifacts
+      - name: Build Docker image
+        run: docker build -t webapp:latest .
