@@ -37,7 +37,5 @@ jobs:
       - run: cd ./src/WebApplication1
       - name: Restore
         run: dotnet restore ./src/TestProject1
-      - name: Build
-        run: dotnet build ./src/TestProject1
       - name: Test
         run: dotnet test ./src/TestProject1
