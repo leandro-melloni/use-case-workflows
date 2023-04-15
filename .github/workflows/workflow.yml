@@ -54,7 +54,7 @@ jobs:
         with:
             registry: ghcr.io
             username: ${{ github.actor }}
-            password: ${{ secrets.GITHUB_TOKEN }}
+            password: ${{ secrets.PAT }}
       - name: Build Docker image
         run: docker build -t ghcr.io/leandro-melloni/use-case-workflows:latest .
       - name: Push Docker image
